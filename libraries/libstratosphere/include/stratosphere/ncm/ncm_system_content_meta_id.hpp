@@ -582,37 +582,5 @@ namespace ams::ncm {
         constexpr inline bool operator==(const SystemApplicationId &) const = default;
         constexpr inline bool operator!=(const SystemApplicationId &) const = default;
     };
-    
-    struct TinfoilId {
-        u64 value;
 
-        constexpr operator ProgramId() const {
-            return { this->value };
-        }
-
-        constexpr inline bool operator==(const TinfoilId &) const = default;
-        constexpr inline bool operator!=(const TinfoilId &) const = default;
-
-        static const TinfoilId Start;
-
-	    static const TinfoilId Tinfoil;
-        static const TinfoilId TinfoilForwarder;
-
-        static const TinfoilId End;
-    };
-
-    inline constexpr const TinfoilId TinfoilId::Start                         = { 0x0500000000000000ul };
-	
-	inline constexpr const TinfoilId TinfoilId::TinfoilForwarder              = { 0x0500000000010000ul };
-    inline constexpr const TinfoilId TinfoilId::Tinfoil                       = { 0x050000BADDAD0000ul }; 
-
-    inline constexpr const TinfoilId TinfoilId::End                           = { 0x050000C000000000ul };
-
-    inline constexpr bool IsTinfoilId(const ProgramId &program_id) {
-        return (TinfoilId::Start <= program_id && program_id <= TinfoilId::End) || IsTinfoilId(program_id);
-    }
-
-    inline constexpr bool IsTinfoilId(const TinfoilId &) {
-        return true;
-    }
 }
